@@ -1,19 +1,98 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <folder-tree :spisObject="getData()" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FolderTree from './components/FolderTree.vue';
+import data from '../public/static/node_modules.json';
+// const mockData = {
+//   type: 'directory',
+//   name: 'asdf',
+//   contents: [
+//     {
+//       type: 'file',
+//       name: 'LICENSE',
+//     },
+//     {
+//       type: 'file',
+//       name: 'README.md',
+//     },
+//     {
+//       type: 'directory',
+//       name: 'lib',
+//       contents: [
+//         {
+//           type: 'file',
+//           name: 'index.js',
+//         },
+//         {
+//           type: 'directory',
+//           name: 'lib',
+//           contents: [
+//             {
+//               type: 'file',
+//               name: 'index.js',
+//             },
+//             {
+//               type: 'directory',
+//               name: 'lib',
+//               contents: [
+//                 {
+//                   type: 'file',
+//                   name: 'index.js',
+//                 },
+//                 {
+//                   type: 'directory',
+//                   name: 'lib',
+//                   contents: [
+//                     {
+//                       type: 'file',
+//                       name: 'indexd.js',
+//                     },
+//                     {
+//                       type: 'file',
+//                       name: 'indexd.fjs',
+//                     },
+//                     {
+//                       type: 'file',
+//                       name: 'indexds.js',
+//                     },
+//                     {
+//                       type: 'file',
+//                       name: 'indexd.js',
+//                     },
+//                   ],
+//                 },
+//               ],
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//     {
+//       type: 'file',
+//       name: 'package.json',
+//     },
+//   ],
+// };
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    FolderTree,
+  },
+  data: function() {
+    return {};
+  },
+
+  methods: {
+    getData() {
+      return data;
+    },
+  },
+};
 </script>
 
 <style>
@@ -21,7 +100,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
