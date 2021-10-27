@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <folder-tree :spisObject="getData()" />
+    <folder-tree :spisObject="tree" />
   </div>
 </template>
 
@@ -13,15 +13,7 @@ export default {
   components: {
     FolderTree,
   },
-  data: function() {
-    return {};
-  },
-
-  methods: {
-    getData() {
-      return data;
-    },
-  },
+  data: () => ({ tree: data }),
 };
 </script>
 
