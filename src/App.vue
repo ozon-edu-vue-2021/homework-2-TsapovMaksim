@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <folder-tree :spisObject="tree" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FolderTree from './components/FolderTree.vue';
+import data from '../public/static/node_modules.json';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    FolderTree,
+  },
+  data: () => ({ tree: data }),
+};
 </script>
 
 <style>
@@ -21,7 +22,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
