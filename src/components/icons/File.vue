@@ -17,5 +17,3 @@ export default {
   name: 'FileIcon',
 };
 </script>
-
-<style></style>

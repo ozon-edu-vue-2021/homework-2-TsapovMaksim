@@ -1,14 +1,13 @@
 <template>
   <div class="directory">
-    <div>
-      <component :is="iconsForType[spisObject.type]" />
-      {{ spisObject.name }}
-      <button
+    <div class="directory__folder" @click="toggleOpenDirectory">
+      <icon-directory :iconType="spisObject.type" />
+      <span class="directory__folder-text">{{ spisObject.name }}</span>
+      <div
+        class="arrow"
+        :class="{ arrow_bottom: isDirectoryOpen }"
         v-if="spisObject.type === 'directory'"
-        @click="toggleOpenDirectory"
-      >
-        {{ isDirectoryOpen ? 'Close' : 'Open' }}
-      </button>
+      ></div>
     </div>
 
     <template v-if="isDirectoryOpen">
@@ -24,11 +23,12 @@
         <div
           v-else
           @click="onItemClick(index)"
+          class="directory__file"
           :class="{
             selected: activeItem.value === `${index}${currentIndex}`,
           }"
         >
-          <component :is="iconsForType[item.type]" />
+          <icon-directory :iconType="item.type" />
           {{ item.name }}
         </div>
       </div>
@@ -37,16 +37,12 @@
 </template>
 
 <script>
-import FolderIcon from './icons/Folder.vue';
-import FileIcon from './icons/File.vue';
-import LinkIcon from './icons/Link.vue';
+import IconDirectory from './IconDirectory.vue';
 
 export default {
   name: 'TreeDir',
   components: {
-    FolderIcon,
-    FileIcon,
-    LinkIcon,
+    IconDirectory,
   },
   inject: ['selectedItem', 'setSelectedItem'],
   props: {
@@ -61,17 +57,20 @@ export default {
   },
   data: function() {
     return {
-      iconsForType: {
-        file: FileIcon,
-        directory: FolderIcon,
-        link: LinkIcon,
-      },
       isDirectoryOpen: false,
       activeItem: this.selectedItem,
     };
   },
   methods: {
     toggleOpenDirectory() {
+      const difference =
+        this.selectedItem.value.length - this.currentIndex.length;
+      const slicedByDifference = this.selectedItem.value.slice(difference);
+
+      if (slicedByDifference === this.currentIndex) {
+        this.setSelectedItem('');
+      }
+
       this.isDirectoryOpen = !this.isDirectoryOpen;
     },
     onItemClick(index) {
@@ -87,6 +86,32 @@ export default {
   padding-left: 10px;
   border-left: 1px solid black;
   margin-bottom: 10px;
+}
+
+.directory__folder {
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.directory__folder-text {
+  margin-left: 2px;
+}
+
+.directory__file {
+  cursor: pointer;
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+  border-top: 4px solid #6e18c0;
+  border-right: 4px solid #6e18c0;
+  transform: translateX(3px) rotate(135deg);
+  margin-left: 5px;
+}
+
+.arrow_bottom {
+  transform: rotate(-45deg) translateY(6px) translateX(-2px);
 }
 
 .selected {

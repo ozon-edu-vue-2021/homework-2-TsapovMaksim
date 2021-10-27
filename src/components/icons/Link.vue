@@ -17,5 +17,3 @@ export default {
   name: 'LinkIcon',
 };
 </script>
-
-<style></style>

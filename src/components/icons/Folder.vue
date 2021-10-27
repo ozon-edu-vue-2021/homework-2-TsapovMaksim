@@ -17,5 +17,3 @@ export default {
   name: 'FolderIcon',
 };
 </script>
-
-<style></style>
